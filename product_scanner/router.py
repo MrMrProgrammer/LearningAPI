@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 from .schemas import BarcodeData
-from datetime import datetime
 import jdatetime
 
 router = APIRouter()
