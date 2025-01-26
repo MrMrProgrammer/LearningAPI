@@ -3,7 +3,7 @@ from fastapi import APIRouter, status
 
 router = APIRouter()
 
-@router.get("/", summary="DEMAND")
+@router.get("/")
 def home():
 
     with open("website/templates/index.html", "r", encoding='utf-8') as f:

@@ -2,8 +2,6 @@ from dotenv import load_dotenv
 import uvicorn
 import os
 
-from db import database
-
 load_dotenv()
 
 PROJECT_HOST = os.getenv('PROJECT_HOST')
