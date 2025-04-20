@@ -46,6 +46,9 @@ def fetch_price_from_api(price_key):
             response.raise_for_status()
 
             data = response.json()
+
+            print(f"Response data: {data}")  # برای دیباگ
+
             current = data.get('current', {})
             if not current:
                 continue
