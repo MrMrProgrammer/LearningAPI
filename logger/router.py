@@ -1,14 +1,14 @@
-from fastapi import FastAPI, Request
+from fastapi import APIRouter, Request
 from datetime import datetime
 import logging
 
-app = FastAPI()
+router = APIRouter()
 
 # تنظیم لاگر برای ذخیره در فایل
 logging.basicConfig(filename="logs.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
 logger = logging.getLogger("redirect-logger")
 
-@app.post("/log-visit")
+@router.post("/log-visit")
 async def log_visit(request: Request):
     # IP کلاینت
     client_host = request.client.host

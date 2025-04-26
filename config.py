@@ -7,6 +7,7 @@ from books.router import router as books_router
 from website.router import router as website_router
 from product_scanner.router import router as product_scanner
 from economic.router import router as economic_router
+from logger.router import router as logger_router
 
 app = FastAPI(
     docs_url = "/swagger",
@@ -18,6 +19,7 @@ app.include_router(users_router, tags=['Users'], prefix="/users")
 app.include_router(books_router, tags=['Books'], prefix="/books")
 app.include_router(product_scanner, tags=['Product Scanner'], prefix="/product_scanner")
 app.include_router(website_router, tags=['Website'], prefix="")
+app.include_router(logger_router, tags=['Logger'], prefix="/logger")
 
 app.mount("/static", StaticFiles(directory="website/static"), name="static")
 
