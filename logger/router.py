@@ -4,9 +4,7 @@ import logging
 
 router = APIRouter()
 
-# تنظیم لاگر برای ذخیره در فایل
-logging.basicConfig(filename="logs.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
-logger = logging.getLogger("redirect-logger")
+logger = logging.getLogger("redirect-logger")  # فقط این باشه
 
 @router.post("/log-visit")
 async def log_visit(request: Request):
