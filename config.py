@@ -2,6 +2,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI
 import logging
+import sys
 
 from users.router import router as users_router
 from books.router import router as books_router
@@ -10,7 +11,11 @@ from product_scanner.router import router as product_scanner
 from economic.router import router as economic_router
 from logger.router import router as logger_router
 
-logging.basicConfig(filename="logs.txt", level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(
+    stream=sys.stdout,
+    level=logging.INFO, 
+    format='%(asctime)s - %(message)s'
+)
 
 app = FastAPI(
     docs_url = "/swagger",
