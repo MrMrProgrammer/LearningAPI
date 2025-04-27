@@ -10,6 +10,7 @@ from website.router import router as website_router
 from product_scanner.router import router as product_scanner
 from economic.router import router as economic_router
 from logger.router import router as logger_router
+from scraping.router import router as scraping_router
 
 logging.basicConfig(
     stream=sys.stdout,
@@ -26,8 +27,10 @@ app.include_router(economic_router, tags=['Economic'], prefix="/economic")
 app.include_router(users_router, tags=['Users'], prefix="/users")
 app.include_router(books_router, tags=['Books'], prefix="/books")
 app.include_router(product_scanner, tags=['Product Scanner'], prefix="/product_scanner")
-app.include_router(website_router, tags=['Website'], prefix="")
 app.include_router(logger_router, tags=['Logger'], prefix="/logger")
+app.include_router(scraping_router, tags=['Web Scraping'], prefix="/scraping")
+app.include_router(website_router, tags=['Website'], prefix="")
+
 
 app.mount("/static", StaticFiles(directory="website/static"), name="static")
 

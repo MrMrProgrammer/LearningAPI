@@ -8,3 +8,5 @@ python-dotenv==1.0.1
 jdatetime==5.2.0
 requests
 slowapi
+newspaper3k
+lxml-html-clean
