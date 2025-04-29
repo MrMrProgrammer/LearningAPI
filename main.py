@@ -10,4 +10,4 @@ RELOAD = os.getenv('RELOAD')
 
 
 if __name__ == "__main__":
-    uvicorn.run("config:app", host=PROJECT_HOST, port=int(PROJECT_PORT), reload=True)
+    uvicorn.run("config:app", host=PROJECT_HOST, port=int(PROJECT_PORT))
