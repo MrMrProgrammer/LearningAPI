@@ -4,26 +4,39 @@ from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
 from fastapi.responses import StreamingResponse
 from pathlib import Path
+from typing import Set
 import asyncio
 
 router = APIRouter()
 
-message_queue = asyncio.Queue()
+# نگهداری از تمام صف‌های کلاینت
+subscribers: Set[asyncio.Queue] = set()
 
+# ------------------------------------------------------------------------
 
 @router.post("/send")
 async def send_message(payload: MessageSchema):
-    await message_queue.put(payload.message)
+    for queue in subscribers:
+        await queue.put(payload.message)
     return {"status": "message sent"}
 
 # ------------------------------------------------------------------------
 
 @router.get("/events")
 async def sse():
+    queue = asyncio.Queue()
+    subscribers.add(queue)
+
     async def event_generator():
-        while True:
-            message = await message_queue.get()
-            yield f"data: {message}\n\n"
+        try:
+            while True:
+                message = await queue.get()
+                yield f"data: {message}\n\n"
+        except asyncio.CancelledError:
+            pass
+        finally:
+            # کلاینت از اتصال خارج شد، صف رو پاک کن
+            subscribers.remove(queue)
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
